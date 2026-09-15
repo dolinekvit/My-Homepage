@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Class names quoted in design docs must not end up in the CSS bundle. */
+@source not "../../docs";
+
+/* Dark mode is driven only by the .dark class on <html>; see src/lib/theme.ts. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* -apple-system resolves to SF Pro on macOS; other platforms get their system UI font. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  --font-heading:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Light: macOS system colors (systemBlue, label, secondaryLabel, fills, separators). */
+:root {
+  color-scheme: light;
+  --radius: 0.75rem;
+  --background: #f5f5f7;
+  --foreground: #1d1d1f;
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+  --primary: #007aff;
+  --primary-foreground: #ffffff;
+  --secondary: rgb(120 120 128 / 12%);
+  --secondary-foreground: #1d1d1f;
+  --muted: rgb(120 120 128 / 12%);
+  --muted-foreground: rgb(60 60 67 / 60%);
+  --accent: rgb(120 120 128 / 16%);
+  --accent-foreground: #1d1d1f;
+  --destructive: #ff3b30;
+  --border: rgb(0 0 0 / 10%);
+  --input: rgb(0 0 0 / 12%);
+  --ring: #007aff;
+  --chart-1: #007aff;
+  --chart-2: #34c759;
+  --chart-3: #ff9500;
+  --chart-4: #af52de;
+  --chart-5: #ff2d55;
+  --sidebar: #f5f5f7;
+  --sidebar-foreground: #1d1d1f;
+  --sidebar-primary: #007aff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgb(120 120 128 / 16%);
+  --sidebar-accent-foreground: #1d1d1f;
+  --sidebar-border: rgb(0 0 0 / 10%);
+  --sidebar-ring: #007aff;
+}
+
+/* Dark: macOS dark-appearance system colors. */
+.dark {
+  color-scheme: dark;
+  --background: #1c1c1e;
+  --foreground: #f5f5f7;
+  --card: #2c2c2e;
+  --card-foreground: #f5f5f7;
+  --popover: #2c2c2e;
+  --popover-foreground: #f5f5f7;
+  --primary: #0a84ff;
+  --primary-foreground: #ffffff;
+  --secondary: rgb(120 120 128 / 24%);
+  --secondary-foreground: #f5f5f7;
+  --muted: rgb(120 120 128 / 24%);
+  --muted-foreground: rgb(235 235 245 / 60%);
+  --accent: rgb(120 120 128 / 32%);
+  --accent-foreground: #f5f5f7;
+  --destructive: #ff453a;
+  --border: rgb(255 255 255 / 12%);
+  --input: rgb(255 255 255 / 15%);
+  --ring: #0a84ff;
+  --chart-1: #0a84ff;
+  --chart-2: #30d158;
+  --chart-3: #ff9f0a;
+  --chart-4: #bf5af2;
+  --chart-5: #ff375f;
+  --sidebar: #1c1c1e;
+  --sidebar-foreground: #f5f5f7;
+  --sidebar-primary: #0a84ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgb(120 120 128 / 32%);
+  --sidebar-accent-foreground: #f5f5f7;
+  --sidebar-border: rgb(255 255 255 / 12%);
+  --sidebar-ring: #0a84ff;
+}
+
+/* Frosted-glass surface for widget cards and floating buttons. */
+@utility glass {
+  background-color: rgb(255 255 255 / 60%);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgb(255 255 255 / 55%);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 4%),
+    0 16px 48px -16px rgb(0 0 0 / 20%);
+
+  @variant dark {
+    background-color: rgb(44 44 46 / 55%);
+    border-color: rgb(255 255 255 / 8%);
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 30%),
+      0 16px 48px -16px rgb(0 0 0 / 60%);
+  }
+}
+
+/* Soft gradient standing in for a wallpaper behind the new tab. */
+@utility wallpaper {
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgb(0 122 255 / 18%), transparent 70%),
+    radial-gradient(50% 50% at 85% 15%, rgb(175 82 222 / 16%), transparent 70%),
+    radial-gradient(70% 60% at 50% 100%, rgb(255 149 0 / 14%), transparent 70%), var(--background);
+
+  @variant dark {
+    background:
+      radial-gradient(60% 50% at 15% 10%, rgb(10 132 255 / 22%), transparent 70%),
+      radial-gradient(50% 50% at 85% 15%, rgb(191 90 242 / 18%), transparent 70%),
+      radial-gradient(70% 60% at 50% 100%, rgb(255 159 10 / 10%), transparent 70%),
+      var(--background);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans antialiased;
+  }
+  body {
+    @apply min-h-dvh bg-background text-foreground;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
