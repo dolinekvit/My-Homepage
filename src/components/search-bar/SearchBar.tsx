@@ -1,8 +1,16 @@
-import { useSettings } from "@/lib/useSettings";
-import { Input } from "../ui/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
+import { Search } from "lucide-react";
+import { useSearch } from "@/hooks/use-search";
 
 export function SearchBar() {
-  const { settings } = useSettings();
+  const { term, onChange, onKeyPress } = useSearch();
 
-  return <Input className="glass" placeholder="Search..." />;
+  return (
+    <InputGroup className="glass" onKeyDown={onKeyPress}>
+      <InputGroupAddon align="inline-start">
+        <Search />
+      </InputGroupAddon>
+      <InputGroupInput value={term} onChange={onChange} placeholder="Search..." />
+    </InputGroup>
+  );
 }
