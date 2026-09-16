@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { WidgetBoundary } from "@/components/WidgetBoundary";
 import { WeatherWidget } from "@/features/weather/WeatherWidget";
 import { useSettings } from "@/lib/useSettings";
+import { SearchBar } from '@/components/search-bar/SearchBar';
 
 export function NewTab() {
   const { isLoading } = useSettings();
@@ -23,9 +24,12 @@ export function NewTab() {
       </header>
 
       {!isLoading && (
-        <main className="mx-auto grid max-w-5xl grid-cols-[repeat(auto-fill,minmax(16rem,1fr))] gap-4 px-6 pt-[12vh]">
+        <main className="mx-auto grid max-w-5xl grid-cols-[1fr_2fr] gap-4 px-6 pt-[12vh]">
           <WidgetBoundary name="Weather">
             <WeatherWidget />
+          </WidgetBoundary>
+          <WidgetBoundary name="Search">
+            <SearchBar />
           </WidgetBoundary>
         </main>
       )}

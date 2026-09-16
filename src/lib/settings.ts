@@ -1,5 +1,6 @@
 export type Appearance = "auto" | "light" | "dark";
 export type TemperatureUnit = "celsius" | "fahrenheit";
+export type SearchProvider = "google" | "bing" | "duckduckgo" | "brave"
 
 export type SavedLocation = {
   name: string;
@@ -12,6 +13,7 @@ export type Settings = {
   appearance: Appearance;
   temperatureUnit: TemperatureUnit;
   location: SavedLocation | null;
+  searchProvider: SearchProvider;
 };
 
 /** All settings live under one key in chrome.storage.sync (small quota: keep it tiny). */
@@ -22,6 +24,7 @@ export const DEFAULT_SETTINGS: Settings = {
   appearance: "auto",
   temperatureUnit: "celsius",
   location: null,
+  searchProvider: "duckduckgo"
 };
 
 export function mergeWithDefaults(stored: unknown): Settings {

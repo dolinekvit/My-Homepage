@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { SegmentedControl, type SegmentedOption } from "@/components/SegmentedControl";
 import { LocationSetting } from "@/features/weather/LocationSetting";
-import type { Appearance, TemperatureUnit } from "@/lib/settings";
+import type { Appearance, SearchProvider, TemperatureUnit } from "@/lib/settings";
 import { useSettings } from "@/lib/useSettings";
 
 const APPEARANCE_OPTIONS: readonly SegmentedOption<Appearance>[] = [
@@ -13,6 +13,13 @@ const APPEARANCE_OPTIONS: readonly SegmentedOption<Appearance>[] = [
 const TEMPERATURE_OPTIONS: readonly SegmentedOption<TemperatureUnit>[] = [
   { value: "celsius", label: "°C" },
   { value: "fahrenheit", label: "°F" },
+];
+
+const SEARCH_ENGINES: readonly SegmentedOption<SearchProvider>[] = [
+  { value: "google", label: "Google" },
+  { value: "duckduckgo", label: "GoGoDuck" },
+  { value: "bing", label: "Bing" },
+  { value: "brave", label: "Brave" },
 ];
 
 function SettingsGroup({ title, children }: { title: string; children: ReactNode }) {
@@ -64,6 +71,17 @@ export function Options() {
             value={settings.temperatureUnit}
             options={TEMPERATURE_OPTIONS}
             onChange={(temperatureUnit) => updateSettings({ temperatureUnit })}
+          />
+        </SettingsRow>
+      </SettingsGroup>
+
+      <SettingsGroup title="Search">
+        <SettingsRow label="Engine">
+          <SegmentedControl
+            label="Search engine"
+            value={settings.searchProvider}
+            options={SEARCH_ENGINES}
+            onChange={(searchProvider) => updateSettings({ searchProvider })}
           />
         </SettingsRow>
       </SettingsGroup>
