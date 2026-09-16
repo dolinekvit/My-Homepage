@@ -3,9 +3,9 @@ import { useSettings } from '@/lib/useSettings';
 import { useState } from 'react';
 
 const SEARCH_ENGINE_URL: Record<SearchProvider, string> = {
-  "google": "https://www.google.com/?q=",
+  "google": "https://www.google.com/search?q=",
   "bing": "https://www.bing.com/search?q=",
-  "gogoduck": "https://duckduckgo.com/?q=",
+  "duckduckgo": "https://duckduckgo.com/?q=",
   "brave": "https://search.brave.com/search?q="
 }
 

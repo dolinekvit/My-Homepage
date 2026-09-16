@@ -1,6 +1,6 @@
 export type Appearance = "auto" | "light" | "dark";
 export type TemperatureUnit = "celsius" | "fahrenheit";
-export type SearchProvider = "google" | "bing" | "gogoduck" | "brave"
+export type SearchProvider = "google" | "bing" | "duckduckgo" | "brave"
 
 export type SavedLocation = {
   name: string;
@@ -24,7 +24,7 @@ export const DEFAULT_SETTINGS: Settings = {
   appearance: "auto",
   temperatureUnit: "celsius",
   location: null,
-  searchProvider: "gogoduck"
+  searchProvider: "duckduckgo"
 };
 
 export function mergeWithDefaults(stored: unknown): Settings {
