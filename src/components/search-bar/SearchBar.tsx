@@ -10,7 +10,7 @@ export function SearchBar() {
       <InputGroupAddon align="inline-start">
         <Search />
       </InputGroupAddon>
-      <InputGroupInput value={term} onChange={onChange} placeholder="Search..." />
+      <InputGroupInput value={term} onChange={onChange} placeholder="Search..." autoFocus={true} />
     </InputGroup>
   );
 }
