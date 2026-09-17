@@ -1,5 +1,9 @@
 import { cva } from "class-variance-authority";
 import { Plus } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Button } from '../ui/button';
 
 const tile = "group flex w-20 cursor-pointer flex-col items-center gap-2 rounded-xl outline-none";
 
@@ -32,11 +36,26 @@ export function FavoriteSite({ name, url }: { name: string; url: string }) {
 
 export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
   return (
-    <button type="button" onClick={onClick} className={tile}>
-      <span className={appIcon({ variant: "add" })}>
-        <Plus className="size-7 text-muted-foreground" strokeWidth={1.75} />
-      </span>
-      <span className="text-xs font-medium text-muted-foreground">Add site</span>
-    </button>
+    <Popover>
+      <PopoverTrigger asChild={true}>
+        <button type="button" onClick={onClick} className={tile}>
+          <span className={appIcon({ variant: "add" })}>
+            <Plus className="size-7 text-muted-foreground" strokeWidth={1.75} />
+          </span>
+          <span className="text-xs font-medium text-muted-foreground">Add site</span>
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="url">URL</Label>
+          <Input name="url" placeholder="Site URL" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="name">Name</Label>
+          <Input name="name" placeholder="Site name" />
+        </div>
+        <Button>Add</Button>
+      </PopoverContent>
+    </Popover>
   );
 }
