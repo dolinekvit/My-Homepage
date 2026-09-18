@@ -3,9 +3,9 @@ import { Plus } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { Button } from '../ui/button';
-import { useSettings } from '@/lib/useSettings';
-import { useState } from 'react';
+import { Button } from "../ui/button";
+import { useSettings } from "@/lib/useSettings";
+import { useState } from "react";
 
 const tile = "group flex w-20 cursor-pointer flex-col items-center gap-2 rounded-xl outline-none";
 
@@ -37,30 +37,32 @@ export function FavoriteSite({ name, url }: { name: string; url: string }) {
 }
 
 export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
-  const [url, setUrl] = useState('')
-  const [name, setName] = useState('')
-  const [popoverOpen, setPopoverOpen] = useState(false)
+  const [url, setUrl] = useState("");
+  const [name, setName] = useState("");
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
-  const { settings, updateSettings } = useSettings()
+  const { settings, updateSettings } = useSettings();
 
   const addSite = () => {
     if (Boolean(url) && Boolean(name)) {
-      const urlOrigin = url.match(/^http|https/) ? new URL(url).origin : new URL(`https://${url}`).origin 
+      const urlOrigin = url.match(/^http|https/)
+        ? new URL(url).origin
+        : new URL(`https://${url}`).origin;
 
-      updateSettings({ favoriteSites: [...settings.favoriteSites, { url: urlOrigin, name }]})
+      updateSettings({ favoriteSites: [...settings.favoriteSites, { url: urlOrigin, name }] });
     }
 
-    setPopoverOpen(false)
-  }
+    setPopoverOpen(false);
+  };
 
   const onPopoverToggle = (open: boolean) => {
     if (!open) {
-      setUrl('')
-      setName('')
+      setUrl("");
+      setName("");
     }
 
-    setPopoverOpen(open)
- }
+    setPopoverOpen(open);
+  };
 
   return (
     <Popover onOpenChange={onPopoverToggle} open={popoverOpen}>
@@ -75,11 +77,19 @@ export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
       <PopoverContent className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <Label htmlFor="url">URL</Label>
-          <Input name="url" placeholder="Site URL" onChange={(e) => setUrl(e.currentTarget.value)} />
+          <Input
+            name="url"
+            placeholder="Site URL"
+            onChange={(e) => setUrl(e.currentTarget.value)}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Name</Label>
-          <Input name="name" placeholder="Site name" onChange={(e) => setName(e.currentTarget.value)}/>
+          <Input
+            name="name"
+            placeholder="Site name"
+            onChange={(e) => setName(e.currentTarget.value)}
+          />
         </div>
         <Button onClick={addSite}>Add</Button>
       </PopoverContent>
