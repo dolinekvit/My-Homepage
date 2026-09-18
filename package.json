@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "zip": "pnpm build && cd dist && zip -qr ../my-homepage-$npm_package_version.zip . -x '.*' && cd ..",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
