@@ -4,6 +4,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from '../ui/button';
+import { useSettings } from '@/lib/useSettings';
+import { useState } from 'react';
 
 const tile = "group flex w-20 cursor-pointer flex-col items-center gap-2 rounded-xl outline-none";
 
@@ -19,8 +21,8 @@ const appIcon = cva(
   },
 );
 
-function faviconUrl(siteUrl: string) {
-  return `https://www.google.com/s2/favicons?domain=${new URL(siteUrl).hostname}&sz=64`;
+function faviconUrl(site: string) {
+  return `https://www.google.com/s2/favicons?domain=${site}&sz=64`;
 }
 
 export function FavoriteSite({ name, url }: { name: string; url: string }) {
@@ -35,8 +37,33 @@ export function FavoriteSite({ name, url }: { name: string; url: string }) {
 }
 
 export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
+  const [url, setUrl] = useState('')
+  const [name, setName] = useState('')
+  const [popoverOpen, setPopoverOpen] = useState(false)
+
+  const { settings, updateSettings } = useSettings()
+
+  const addSite = () => {
+    if (Boolean(url) && Boolean(name)) {
+      const urlOrigin = url.match(/^http|https/) ? new URL(url).origin : new URL(`https://${url}`).origin 
+
+      updateSettings({ favoriteSites: [...settings.favoriteSites, { url: urlOrigin, name }]})
+    }
+
+    setPopoverOpen(false)
+  }
+
+  const onPopoverToggle = (open: boolean) => {
+    if (!open) {
+      setUrl('')
+      setName('')
+    }
+
+    setPopoverOpen(open)
+ }
+
   return (
-    <Popover>
+    <Popover onOpenChange={onPopoverToggle} open={popoverOpen}>
       <PopoverTrigger asChild={true}>
         <button type="button" onClick={onClick} className={tile}>
           <span className={appIcon({ variant: "add" })}>
@@ -48,13 +75,13 @@ export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
       <PopoverContent className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <Label htmlFor="url">URL</Label>
-          <Input name="url" placeholder="Site URL" />
+          <Input name="url" placeholder="Site URL" onChange={(e) => setUrl(e.currentTarget.value)} />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Name</Label>
-          <Input name="name" placeholder="Site name" />
+          <Input name="name" placeholder="Site name" onChange={(e) => setName(e.currentTarget.value)}/>
         </div>
-        <Button>Add</Button>
+        <Button onClick={addSite}>Add</Button>
       </PopoverContent>
     </Popover>
   );
