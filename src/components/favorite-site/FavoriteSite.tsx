@@ -74,7 +74,7 @@ export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
           <span className="text-xs font-medium text-muted-foreground">Add site</span>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col gap-3">
+      <PopoverContent className="flex flex-col gap-3" aria-label="Add new favorite site">
         <div className="flex flex-col gap-2">
           <Label htmlFor="url">URL</Label>
           <Input
