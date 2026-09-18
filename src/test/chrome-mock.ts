@@ -46,6 +46,7 @@ export function installChromeMock(): void {
     runtime: {
       openOptionsPage: vi.fn(async () => {}),
       getManifest: vi.fn(() => ({ version: "0.0.0-test" })),
+      getURL: vi.fn((path: string) => `chrome-extension://test-extension-id${path}`),
     },
   });
 }
