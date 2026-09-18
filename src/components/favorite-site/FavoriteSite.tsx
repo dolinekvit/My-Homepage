@@ -80,6 +80,7 @@ export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
           <Input
             name="url"
             placeholder="Site URL"
+            aria-label="Site URL"
             onChange={(e) => setUrl(e.currentTarget.value)}
           />
         </div>
@@ -88,6 +89,7 @@ export function AddFavoriteButton({ onClick }: { onClick?: () => void }) {
           <Input
             name="name"
             placeholder="Site name"
+            aria-label="Site name"
             onChange={(e) => setName(e.currentTarget.value)}
           />
         </div>
