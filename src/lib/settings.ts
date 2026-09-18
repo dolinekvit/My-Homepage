@@ -9,11 +9,17 @@ export type SavedLocation = {
   longitude: number;
 };
 
+export type FavoriteSite = {
+  name: string;
+  url: string;
+}
+
 export type Settings = {
   appearance: Appearance;
   temperatureUnit: TemperatureUnit;
   location: SavedLocation | null;
   searchProvider: SearchProvider;
+  favoriteSites: FavoriteSite[];
 };
 
 /** All settings live under one key in chrome.storage.sync (small quota: keep it tiny). */
@@ -24,7 +30,8 @@ export const DEFAULT_SETTINGS: Settings = {
   appearance: "auto",
   temperatureUnit: "celsius",
   location: null,
-  searchProvider: "duckduckgo"
+  searchProvider: "duckduckgo",
+  favoriteSites: []
 };
 
 export function mergeWithDefaults(stored: unknown): Settings {

@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { WidgetBoundary } from "@/components/WidgetBoundary";
 import { WeatherWidget } from "@/features/weather/WeatherWidget";
 import { useSettings } from "@/lib/useSettings";
-import { SearchBar } from '@/components/search-bar/SearchBar';
+import { SearchBar } from "@/components/search-bar/SearchBar";
+import { FavoriteSites } from '@/components/favorite-site/FavoriteSites';
 
 export function NewTab() {
   const { isLoading } = useSettings();
@@ -28,9 +29,14 @@ export function NewTab() {
           <WidgetBoundary name="Weather">
             <WeatherWidget />
           </WidgetBoundary>
-          <WidgetBoundary name="Search">
-            <SearchBar />
-          </WidgetBoundary>
+          <div className="flex flex-col gap-8">
+            <WidgetBoundary name="Search">
+              <SearchBar />
+            </WidgetBoundary>
+            <WidgetBoundary name="Favorite sites">
+              <FavoriteSites />
+            </WidgetBoundary>
+          </div>
         </main>
       )}
     </div>
