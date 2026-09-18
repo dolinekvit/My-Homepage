@@ -5,7 +5,10 @@ export function FavoriteSites() {
   const { settings } = useSettings();
 
   return (
-    <nav aria-label="Favorite sites" className="flex flex-row gap-x-6 gap-y-5">
+    <nav
+      aria-label="Favorite sites"
+      className="flex flex-wrap items-start justify-center gap-x-8 gap-y-7"
+    >
       {settings.favoriteSites.map((props) => (
         <FavoriteSite key={props.url} {...props} />
       ))}
