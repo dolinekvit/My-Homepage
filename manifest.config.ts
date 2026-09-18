@@ -18,7 +18,7 @@ export default defineManifest({
     page: "src/pages/options/index.html",
     open_in_tab: true,
   },
-  permissions: ["storage"],
+  permissions: ["storage", "favicon"],
   // Open-Meteo sends CORS headers, so these aren't strictly required; they document every host
   // the extension talks to and keep the pattern ready for APIs without CORS.
   host_permissions: ["https://api.open-meteo.com/*", "https://geocoding-api.open-meteo.com/*"],
