@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -26,13 +26,29 @@ function faviconUrl(site: string) {
 }
 
 export function FavoriteSite({ name, url }: { name: string; url: string }) {
+  const { settings, updateSettings } = useSettings();
+
+  const removeSite = () => {
+    updateSettings({ favoriteSites: settings.favoriteSites.filter((site) => site.url !== url) });
+  };
+
   return (
-    <a href={url} title={name} className={tile}>
-      <span className={appIcon({ variant: "site" })}>
-        <img src={faviconUrl(url)} alt="" draggable={false} className="size-9 rounded-md" />
-      </span>
-      <span className="max-w-full truncate text-xs font-medium text-foreground/90">{name}</span>
-    </a>
+    <div className="group/site relative w-20">
+      <a href={url} title={name} className={tile}>
+        <span className={appIcon({ variant: "site" })}>
+          <img src={faviconUrl(url)} alt="" draggable={false} className="size-9 rounded-md" />
+        </span>
+        <span className="max-w-full truncate text-xs font-medium text-foreground/90">{name}</span>
+      </a>
+      <button
+        type="button"
+        onClick={removeSite}
+        aria-label={`Remove ${name}`}
+        className="pointer-events-none absolute -top-1 right-1 grid size-5 cursor-pointer place-items-center rounded-full bg-destructive text-white opacity-0 shadow-[0_1px_3px_rgb(0_0_0/35%)] ring-1 ring-white/70 transition-opacity duration-150 group-hover/site:pointer-events-auto group-hover/site:opacity-100 hover:bg-destructive/90 focus-visible:pointer-events-auto focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none dark:ring-black/40"
+      >
+        <X className="size-3" strokeWidth={3} />
+      </button>
+    </div>
   );
 }
 
