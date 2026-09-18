@@ -13,6 +13,32 @@ describe(FavoriteSite.name, () => {
 
     expect(screen.getByRole('link', { name: /duckduckgo/i })).toBeInTheDocument();
   })
+
+  it("should remove the site from favorites", async () => {
+    const user = userEvent.setup();
+    const useSettingsMocked = vi.mocked(useSettings);
+    const updateSettingsMocked = vi.fn();
+    const favoriteSites = [
+      { url: "https://duckduckgo.com", name: "DuckDuckGo" },
+      { url: "https://github.com", name: "GitHub" },
+    ];
+
+    useSettingsMocked.mockImplementation(() => ({
+      settings: { ...DEFAULT_SETTINGS, favoriteSites },
+      isLoading: false,
+      updateSettings: updateSettingsMocked,
+    }));
+
+    render(<FavoriteSite name="DuckDuckGo" url="https://duckduckgo.com" />, {
+      wrapper: createWrapper(),
+    });
+
+    await user.click(screen.getByRole("button", { name: /remove duckduckgo/i }));
+
+    expect(updateSettingsMocked).toHaveBeenCalledWith({
+      favoriteSites: [{ url: "https://github.com", name: "GitHub" }],
+    });
+  })
 })
 
 describe(AddFavoriteButton.name, () => {
