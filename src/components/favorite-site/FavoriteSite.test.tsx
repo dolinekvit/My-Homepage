@@ -14,17 +14,36 @@ describe(FavoriteSite.name, () => {
     expect(screen.getByRole('link', { name: /duckduckgo/i })).toBeInTheDocument();
   })
 
-  it("takes the icon from the browser's own favicon store", () => {
+  function renderedIconUrl() {
     render(<FavoriteSite name="DuckDuckGo" url="https://duckduckgo.com" />, {
       wrapper: createWrapper(),
     });
 
     const icon = screen.getByRole("link", { name: /duckduckgo/i }).querySelector("img");
-    const src = new URL(icon?.getAttribute("src") ?? "");
+    return new URL(icon?.getAttribute("src") ?? "");
+  }
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("takes the icon from the browser's own favicon store in a build", () => {
+    vi.stubEnv("DEV", false);
+
+    const src = renderedIconUrl();
 
     expect(src.pathname).toBe("/_favicon/");
     expect(src.searchParams.get("pageUrl")).toBe("https://duckduckgo.com");
     expect(src.searchParams.get("size")).toBe("64");
+  })
+
+  it("falls back to the google favicon service in dev, where the browser store is unreachable", () => {
+    vi.stubEnv("DEV", true);
+
+    const src = renderedIconUrl();
+
+    expect(src.host).toBe("www.google.com");
+    expect(src.searchParams.get("domain")).toBe("duckduckgo.com");
   })
 
   it("should remove the site from favorites", async () => {

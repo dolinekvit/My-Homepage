@@ -22,6 +22,10 @@ const appIcon = cva(
 );
 
 function faviconUrl(site: string) {
+  if (import.meta.env.DEV) {
+    return `https://www.google.com/s2/favicons?domain=${new URL(site).hostname}&sz=64`;
+  }
+
   const url = new URL(chrome.runtime.getURL("/_favicon/"));
   url.searchParams.set("pageUrl", site);
   url.searchParams.set("size", "64");
