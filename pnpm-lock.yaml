@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@crxjs/vite-plugin@2.7.1': 7a3db4ac6be97c42dffc1be704a9382ce60d2cf652670b701d16cfda82534906
-
 importers:
 
   .:
@@ -50,7 +47,7 @@ importers:
     devDependencies:
       '@crxjs/vite-plugin':
         specifier: ^2.7.1
-        version: 2.7.1(patch_hash=7a3db4ac6be97c42dffc1be704a9382ce60d2cf652670b701d16cfda82534906)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))
+        version: 2.7.1(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.10.0(jiti@2.7.0))
@@ -3751,7 +3748,7 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@crxjs/vite-plugin@2.7.1(patch_hash=7a3db4ac6be97c42dffc1be704a9382ce60d2cf652670b701d16cfda82534906)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))':
+  '@crxjs/vite-plugin@2.7.1(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))':
     dependencies:
       '@webcomponents/custom-elements': 1.6.0
       acorn-walk: 8.3.5
